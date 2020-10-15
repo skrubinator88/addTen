@@ -1,10 +1,14 @@
 var express = require('express');
 var app = express();
-app.get('/:digit', function (req, res) {
-  if(req.params.digit) {
-    res.json({sum: req.params.digit + 10});
-  } else {
+app.get('/', function (req, res) {
     res.json({message: "No input recieved"});
+});
+app.get('/:digit', function (req, res) {
+  let digit = parseInt(req.params.digit)
+  if(typeof digit === 'number') {
+    res.json({sum: digit + 10});
+  } else {
+    res.json({message: "Input needs to be a number"});
   }
 });
 app.listen(3000, function () {
